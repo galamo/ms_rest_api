@@ -11,4 +11,4 @@ CREATE TABLE `vacations`.`vacations` (
   PRIMARY KEY (`id`));
 
 
-INSERT INTO `vacations`.`vacations` (`vacationType`, `price`, `country`) VALUES ('trip', '300', 'IL'),('pleasure', '600', 'DMA');
+INSERT INTO `vacations`.`vacations` (`vacationType`, `price`, `country`) VALUES ('trip', '300', 'IL'),('pleasure', '600', 'DO');
