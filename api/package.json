@@ -2,11 +2,11 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "install-globals": "npm install nodemon -g tsc -g",
     "build-watch": "npx tsc --watch",
-    "start-dev": "nodemon ./dist/index.js",
+    "start-dev": "nodemon --delay 2  ./dist/index.js",
     "start": "concurrently -k -p \"[{name}]\" -n \"TS-Compile-Api,Api\" -c \"blue,red\"  \"npm run build-watch\" \"npm run start-dev\"",
     "test": "mocha ./test/ --recursive --exit"
   },
