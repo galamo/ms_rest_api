@@ -25,10 +25,10 @@ services:
     volumes:
       - "./mysql:/docker-entrypoint-initdb.d/:ro"
 
-  email-sender:
-    image: email-sender
-    depends_on:
-      - rabbitmq
+  # email-sender:
+  #   image: email-sender
+  #   depends_on:
+  #     - rabbitmq
 
 networks:
   rabbitmq_go_net:

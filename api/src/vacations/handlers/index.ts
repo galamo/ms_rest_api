@@ -5,5 +5,6 @@ export default async function getVacationsHandler() {
   console.log(query);
   const [result] = await getConnection().execute(query);
   console.log("finished");
+  console.log(result)
   return result;
 }
