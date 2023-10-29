@@ -6,7 +6,7 @@ import cors from "cors";
 import { initDB } from "./db";
 import router from "./login/route";
 import { router as vacationsRouter } from "./vacations/route";
-
+import { Server } from "socket.io";
 initDB();
 
 const app = express();
@@ -28,4 +28,18 @@ app.use((error, req, res, next) => {
 const { PORT } = process.env;
 app.listen(PORT, () => {
   console.log(`Listening to Port: ${PORT}`);
+});
+
+const io = new Server(4300, {
+  cors: {
+    origin: "*",
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("New connection opened with the Server: ", socket.id);
+
+  socket.on("client-send-message", (message) => {
+    console.log(message);
+  });
 });

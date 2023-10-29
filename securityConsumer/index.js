@@ -38,7 +38,8 @@ function runningConsumer() {
 }
 runningConsumer();
 
-function sendSecurityNotification(message) {
+function sendSecurityNotification(payload) {
+  const { message } = payload;
   const { userName, ip } = message;
   console.log(
     `[Security-Notification] - User ${userName} attacked by ip: ${ip}`
