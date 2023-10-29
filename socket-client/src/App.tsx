@@ -6,16 +6,20 @@ import "./App.css";
 const socket = io("ws://localhost:4300");
 
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
   const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
   const [chatRows, setChatRows] = useState<Array<string>>([]);
 
   useEffect(() => {
     socket.on("message-from-server", (m: string) => {
-      console.log(m);
-      // setChatRows([...chatRows, m]);
+      setChatRows([...chatRows, m]);
     });
-  }, []);
+
+    socket.on("new-user-logged-in", (m: string) => {
+      setChatRows([...chatRows, m]);
+    });
+  }, [chatRows]);
 
   return (
     <>
@@ -30,7 +34,10 @@ function App() {
       <div className="card">
         <button
           onClick={() => {
-            socket.emit("client-login", userName);
+            setIsLoading(true);
+            socket.timeout(4000).emit("client-login", userName, () => {
+              setIsLoading(false);
+            });
           }}
         >
           login
@@ -43,7 +50,7 @@ function App() {
           }}
         />
       </div>
-
+      {isLoading && <h1> Loading.... </h1>}
       <div className="card">
         <button
           onClick={() => {

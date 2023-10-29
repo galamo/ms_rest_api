@@ -16,7 +16,18 @@ PREQ: run `npm i` from all folders (api, countriesApi, dev-apps, emailSender)
 4. open browser and browse to: `http://localhost:4100/vacations`
 
 ## EX - Expose Hacker flows
+
 1. Create new entry point - POST /login { user: "string", password:"string" }
 2. Create new consumer called securityConsumer
 3. Try to validate if the user has wrong in his password for at least 3 times - send a security message over RMQ to the securityConsumer
 4. the consumer will write the name of the user name and the timestamp when someone tried to break his account into a file.
+
+## Ex -
+
+1. Check if the user that connected its You, if its you print ( you are now connected )
+2. Set colors to your messages:
+
+- your messages will be in green ( no need user name )
+- other users messages will be in red
+
+3. Go over angular game socket
