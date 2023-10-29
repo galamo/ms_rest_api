@@ -15,8 +15,7 @@ PREQ: run `npm i` from all folders (api, countriesApi, dev-apps, emailSender)
 3. run `npm run all`
 4. open browser and browse to: `http://localhost:4100/vacations`
 
-## EX - Expose Hacker flow
-
+## EX - Expose Hacker flows
 1. Create new entry point - POST /login { user: "string", password:"string" }
 2. Create new consumer called securityConsumer
 3. Try to validate if the user has wrong in his password for at least 3 times - send a security message over RMQ to the securityConsumer

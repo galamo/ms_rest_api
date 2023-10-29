@@ -1,9 +1,9 @@
 // Consumer
 const amqp = require("amqplib/callback_api");
-const queue = "vacationsNotifications";
+const queue = "securityNotifications";
 let numberOfConnections = 0;
 function runningConsumer() {
-  console.log("emailSender is UP");
+  console.log("securityConsumer is UP");
   amqp.connect("amqp://localhost", function (error0, connection) {
     numberOfConnections++;
     if (error0) {
@@ -27,7 +27,7 @@ function runningConsumer() {
         function (message) {
           const messageObj = JSON.parse(message.content.toString());
           console.log(`Message: ${JSON.stringify(messageObj)}`);
-          sendEmail(messageObj);
+          sendSecurityNotification(messageObj);
         },
         {
           noAck: true,
@@ -38,6 +38,9 @@ function runningConsumer() {
 }
 runningConsumer();
 
-function sendEmail(message) {
-  console.log("Email Sent", message);
+function sendSecurityNotification(message) {
+  const { userName, ip } = message;
+  console.log(
+    `[Security-Notification] - User ${userName} attacked by ip: ${ip}`
+  );
 }

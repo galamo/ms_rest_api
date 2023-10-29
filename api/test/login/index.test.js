@@ -11,22 +11,12 @@ describe("/POST Login", () => {
     //   password: "CorrectPassword",
     // });
     const response = await axios.post(`${loginUrl}`, {
-      userName: "ziv@ziv.com",
-      password: "123456",
+      userName: "stassi",
+      password: "s123456",
     });
     const { token } = response.data;
     expect(response.status).to.be.equal(200);
+    console.log(token);
     expect(token).to.be.string;
   });
 });
-
-function getUser() {
-  const generatedNumber = Math.ceil(Math.random() * 9999);
-  return {
-    company: `company_${generatedNumber}`,
-    last_name: `last_${generatedNumber}`,
-    first_name: `first_${generatedNumber}`,
-    email_address: `test${generatedNumber}@test.com`,
-    job_title: `developer_${generatedNumber}`,
-  };
-}

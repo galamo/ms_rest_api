@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "all": "concurrently -k -p \"[{name}]\" -n \"compile-api,compile-countries,api,countriesApi,emailSender\" -c \"red,red,yellow,yellow,blue,blue\"  \"npm run compile-api\" \"npm run compile-countries\" \"npm run run-api\" \"npm run run-countries-api\" \"npm run run-es-1\" ",
+    "all": "concurrently -k -p \"[{name}]\" -n \"compile-api,compile-countries,api,countriesApi,emailSender,securityConsumer\" -c \"red,yellow,blue,green,gray,white\"  \"npm run compile-api\" \"npm run compile-countries\" \"npm run run-api\" \"npm run run-countries-api\" \"npm run run-es-1\"  \"npm run run-security-consumer\"  ",
     "compile-api": "cd .. && cd api && npm run build-watch",
     "compile-countries": "cd .. && cd countriesApi && npm run build-watch",
     "run-api": "cd .. && cd api && npm run start-dev",
     "run-countries-api": "cd .. && cd countriesApi && npm run start-dev",
     "run-es-1": "cd .. && cd emailSender && npm start",
-    "run-es-2": "cd .. && cd emailSender2 && npm start"
+    "run-security-consumer": "cd .. && cd securityConsumer && npm start"
   },
   "keywords": [],
   "author": "",
