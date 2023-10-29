@@ -36,10 +36,22 @@ const io = new Server(4300, {
   },
 });
 
+const usersMapping = {};
+
+// Connecting - when client connects to the server
 io.on("connection", (socket) => {
   console.log("New connection opened with the Server: ", socket.id);
 
+  socket.on("client-login", (userName) => {
+    // sending message to ALL Clients
+    usersMapping[socket.id] = userName;
+    socket.broadcast.emit("new-user-logged-in", `User: ${userName} has joined`);
+  });
+
+  // Listen to a specific message
   socket.on("client-send-message", (message) => {
-    console.log(message);
+    // sending message to ALL Clients
+    const user = usersMapping[socket.id] || socket.id;
+    io.emit("message-from-server", `${user}: ${message}`);
   });
 });

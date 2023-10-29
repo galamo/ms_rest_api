@@ -6,10 +6,16 @@ import "./App.css";
 const socket = io("ws://localhost:4300");
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
+  const [chatRows, setChatRows] = useState<Array<string>>([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    socket.on("message-from-server", (m: string) => {
+      console.log(m);
+      // setChatRows([...chatRows, m]);
+    });
+  }, []);
 
   return (
     <>
@@ -21,7 +27,23 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <div className="card">
+        <button
+          onClick={() => {
+            socket.emit("client-login", userName);
+          }}
+        >
+          login
+        </button>
+        <input
+          type="text"
+          value={userName}
+          onChange={(e: any) => {
+            setUserName(e.target.value);
+          }}
+        />
+      </div>
+
       <div className="card">
         <button
           onClick={() => {
@@ -38,9 +60,11 @@ function App() {
           }}
         />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div>
+        {chatRows.map((r) => (
+          <h3 key={r}>{r}</h3>
+        ))}
+      </div>
     </>
   );
 }
