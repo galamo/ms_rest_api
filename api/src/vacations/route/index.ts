@@ -2,9 +2,10 @@ import axios from "axios";
 import express from "express";
 import getVacationsHandler from "../handlers";
 //@ts-ignore
-import { sendToQueue } from "./sender";
+import { sendToQueue } from "../../sender";
 
 export const router = express.Router();
+const queue: string = "vacationsNotifications";
 
 router.get("/", getVacations);
 console.log("sender is ready");
@@ -27,7 +28,7 @@ async function getVacations(req, res, next) {
       }
     }, []);
     const countriesNames = finalResult.map((c) => c.country);
-    sendToQueue(countriesNames);
+    sendToQueue(queue, countriesNames);
     return res.json(finalResult);
   } catch (ex) {
     return next(ex);

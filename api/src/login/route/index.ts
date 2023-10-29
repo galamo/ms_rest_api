@@ -1,7 +1,9 @@
 import express from "express";
 import loginUser from "../handlers/loginUser";
 import { signToken } from "../handlers/signJwt";
+import { sendToQueue } from "../../sender";
 const router = express.Router();
+const queue: string = "securityNotifications";
 
 router.post("/", loginHandler);
 let requests = {};
@@ -14,14 +16,14 @@ async function loginHandler(req, res, next) {
   }
 
   try {
+    const { userName, password } = req.body;
     const result = await loginUser({
-      userName: req.body.userName,
-      password: req.body.password,
+      userName,
+      password,
     });
     if (!result) {
-      if (requests[ip] > 3) {
-        // ????
-        requests[ip] = 0;
+      if (requests[ip] >= 3) {
+        sendToQueue(queue, { ip, userName });
       }
       throw new Error("User is not authorized");
     }

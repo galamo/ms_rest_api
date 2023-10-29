@@ -11,8 +11,8 @@ describe("/POST Login", () => {
     //   password: "CorrectPassword",
     // });
     const response = await axios.post(`${loginUrl}`, {
-      userName: "stassii",
-      password: "s123456",
+      userName: "stassi",
+      password: "s12345633",
     });
     const { token } = response.data;
     expect(response.status).to.be.equal(200);

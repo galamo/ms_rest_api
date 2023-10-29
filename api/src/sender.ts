@@ -1,9 +1,7 @@
 const amqp = require("amqplib/callback_api");
 
-const queue: string = "vacationsNotifications";
-
-function sendToQueue(message) {
-  console.log(message, "****************");
+function sendToQueue(queueName: string, message: any) {
+  console.log(message, "****************", "to queue", queueName);
   amqp.connect(process.env.RMQ_HOST, function (error0, connection) {
     if (error0) {
       throw error0;
@@ -13,16 +11,15 @@ function sendToQueue(message) {
         throw error1;
       }
 
-      channel.assertQueue(queue, {
+      channel.assertQueue(queueName, {
         durable: false,
       });
       const objMessageWrapper = { message };
       channel.sendToQueue(
-        queue,
+        queueName,
         Buffer.from(JSON.stringify(objMessageWrapper))
       );
     });
   });
 }
-
-module.exports = { sendToQueue };
+export { sendToQueue };
