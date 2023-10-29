@@ -21,7 +21,7 @@ app.use("/login", router);
 app.use("/vacations", vacationsRouter);
 
 app.use((error, req, res, next) => {
-  console.log(error);
+  // console.log(error);
   return res.status(500).json({ message: "something went wrong" });
 });
 

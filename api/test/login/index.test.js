@@ -11,7 +11,7 @@ describe("/POST Login", () => {
     //   password: "CorrectPassword",
     // });
     const response = await axios.post(`${loginUrl}`, {
-      userName: "stassi",
+      userName: "stassii",
       password: "s123456",
     });
     const { token } = response.data;
