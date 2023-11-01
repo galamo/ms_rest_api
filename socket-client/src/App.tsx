@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import SocketC from "./Socket";
 import { Link } from "react-router-dom";
 import Products from "./UseDefferedValue";
+import ProductsTransition from "./UseTransition";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
             <Link to="/usedefferedvalue">UseDefferedValue</Link>
           </li>
           <li>
+            <Link to="/usetransition">UseTransition</Link>
+          </li>
+          <li>
             <Link to="/dashboard">Dashboard</Link>
           </li>
         </ul>
@@ -26,6 +30,8 @@ function App() {
       <Routes>
         <Route path="/" element={<SocketC />} />
         <Route path="/usedefferedvalue" element={<Products />} />
+        <Route path="/usetransition" element={<ProductsTransition />} />
+
         <Route path="/dashboard" element={<div>Dashboard</div>} />
       </Routes>
     </div>
