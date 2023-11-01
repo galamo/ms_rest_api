@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useDeferredValue } from "react";
 
 export default function Products() {
   const [filter, setFilter] = useState("");
@@ -17,13 +17,14 @@ export default function Products() {
 
 function List({ input }: { input: string }) {
   const size = 30000;
+  const defferedFilter = useDeferredValue(input);
   const list = useMemo(() => {
     const temporaryList = [];
     for (let index = 0; index < size; index++) {
-      temporaryList.push(<div key={index}>{input}</div>);
+      temporaryList.push(<div key={index}>{defferedFilter}</div>);
     }
     return temporaryList;
-  }, [input]);
+  }, [defferedFilter]);
 
   return <div>{list}</div>;
 }
